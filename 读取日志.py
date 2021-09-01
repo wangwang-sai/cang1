@@ -31,18 +31,14 @@ finally:
     file.close()  # 关闭资源
 '''
 import time
-pin = 0
-count=0
 while True:
     with open('baidu_x_system.log', 'r') as f:
-        f.seek(pin) #定位到上次读取文件后，游标的位置
         ips = []   #每次循环时把列表清空，因为是按1分钟进行统计的
         for line in f:
             ip = line.split(' ')[0] #提取每一行的ip，保存到list中
             ips.append(ip)
-        for ip in set(ips):
+        for ip in set(ips): #循环读取集合中的ip并到列表中进行统计
             print('ip为： %s'%ip,"个数为：",ips.count(ip))
-        pin = f.tell() #读取游标当前的位置
     time.sleep(60) #休息60s后开始下一个循环
 
 
